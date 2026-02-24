@@ -1,0 +1,16 @@
+# .htaccess
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Sécurité
+<FilesMatch "\.(php|inc)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "index\.php|product\.php|shop\.php|admin/.*\.php">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
