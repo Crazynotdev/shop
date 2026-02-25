@@ -1,5 +1,5 @@
 <?php
-require 'includes/config.php';
+require_once __DIR__ . '/includes/config.php';
 
 if(isLoggedIn()) {
     redirect('index.php');
