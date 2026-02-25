@@ -1,12 +1,11 @@
-# .htaccess
+# .htaccess corrigé pour Render
 Options -Indexes
 RewriteEngine On
 
-# Redirection HTTPS
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+# IMPORTANT : Render gère déjà HTTPS, PAS de redirection HTTP→HTTPS ici !
+# Supprime toute ligne avec RewriteCond %{HTTPS} off
 
-# URLs propres pour les produits
+# URLs propres (sans redirection HTTPS)
 RewriteRule ^product/([0-9]+)/([a-zA-Z0-9-]+)$ product.php?id=$1&slug=$2 [L,QSA]
 
 # Protection des fichiers sensibles
@@ -15,7 +14,7 @@ RewriteRule ^product/([0-9]+)/([a-zA-Z0-9-]+)$ product.php?id=$1&slug=$2 [L,QSA]
     Deny from all
 </FilesMatch>
 
-<FilesMatch "(config\.php|functions\.php)">
+<FilesMatch "config\.php">
     Order allow,deny
     Deny from all
 </FilesMatch>
@@ -23,15 +22,4 @@ RewriteRule ^product/([0-9]+)/([a-zA-Z0-9-]+)$ product.php?id=$1&slug=$2 [L,QSA]
 # Compression Gzip
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
-</IfModule>
-
-# Cache navigateur
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType image/jpg "access plus 1 year"
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/gif "access plus 1 year"
-    ExpiresByType image/png "access plus 1 year"
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
