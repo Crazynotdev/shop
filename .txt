@@ -1,0 +1,77 @@
+-- 1. Table des utilisateurs
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    full_name VARCHAR(100),
+    phone VARCHAR(20),
+    address TEXT,
+    role VARCHAR(20) DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- 2. Table des catégories
+CREATE TABLE categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    slug VARCHAR(50) UNIQUE NOT NULL,
+    icon VARCHAR(20)
+);
+
+-- 3. Table des produits
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    category_id INTEGER REFERENCES categories(id) ON DELETE SET NULL,
+    name VARCHAR(200) NOT NULL,
+    slug VARCHAR(200) UNIQUE NOT NULL,
+    description TEXT,
+    price DECIMAL(10,2) NOT NULL,
+    old_price DECIMAL(10,2) DEFAULT 0,
+    stock INTEGER DEFAULT 0,
+    image VARCHAR(255),
+    featured BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- 4. Table du panier
+CREATE TABLE carts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
+    quantity INTEGER DEFAULT 1,
+    created_at TIMESTAMP DEFAULT NOW(),
+    UNIQUE(user_id, product_id)
+);
+
+-- 5. Table des commandes
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    total_amount DECIMAL(10,2) NOT NULL,
+    status VARCHAR(50) DEFAULT 'pending',
+    shipping_address TEXT,
+    shipping_phone VARCHAR(20),
+    payment_method VARCHAR(50),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- 6. Table des détails de commande
+CREATE TABLE order_items (
+    id SERIAL PRIMARY KEY,
+    order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
+    product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
+    quantity INTEGER NOT NULL,
+    price DECIMAL(10,2) NOT NULL
+);
+
+-- Insertion des catégories
+INSERT INTO categories (name, slug, icon) VALUES
+('Football', 'football', '⚽'),
+('Basketball', 'basketball', '🏀'),
+('Streetwear', 'streetwear', '👕'),
+('Accessoires', 'accessoires', '🧢');
+
+-- Insertion d'un admin (mot de passe : admin123)
+INSERT INTO users (username, email, password, full_name, role) VALUES
+('admin', 'admin@lbsshop.ga', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrateur', 'admin');
