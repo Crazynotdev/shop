@@ -7,7 +7,7 @@ define('DB_HOST', 'db.cdxtnqpjrdfzyqnturwi.supabase.co');
 define('DB_PORT', '5432');
 define('DB_NAME', 'postgres');
 define('DB_USER', 'postgres');
-define('DB_PASS', 'TMsV-RsQ-prb84.');
+define('DB_PASS', 'LPBzHJV0PsHhHHzY');
 
 try {
     $dsn = "pgsql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME;
