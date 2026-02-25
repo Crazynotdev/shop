@@ -1,6 +1,7 @@
 <?php
-require 'includes/config.php';
-require 'includes/functions.php';
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/includes/functions.php';
+
 
 // Pagination
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
