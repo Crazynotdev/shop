@@ -1,5 +1,7 @@
+# .gitignore
 .env
 .env.local
 *.log
 uploads/
 .DS_Store
+node_modules/
