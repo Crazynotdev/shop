@@ -3,7 +3,7 @@
 session_start();
 
 // Charger l'URL de la base depuis .env ou variables Render
-$database_url = getenv('DATABASE_URL') ?: 'postgresql://user:pass@host:5432/dbname';
+$database_url = getenv('DATABASE_URL') ?: 'postgresql://lbs_db_shop_user:hpGce7K6quNyRJAiQK58drEn4mYRSZrG@dpg-d6g24t75r7bs73f76tv0-a.frankfurt-postgres.render.com/lbs_db_shop';
 
 try {
     $pdo = new PDO($database_url, null, null, [
