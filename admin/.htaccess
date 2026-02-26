@@ -1,0 +1,10 @@
+# admin/.htaccess
+Options +Indexes
+Order allow,deny
+Allow from all
+
+# Autoriser l'accès à tous les fichiers PHP
+<FilesMatch "\.php$">
+    Order allow,deny
+    Allow from all
+</FilesMatch>
