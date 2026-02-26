@@ -2,7 +2,7 @@
 // create-all-tables.php - À EXÉCUTER UNE SEULE FOIS, PUIS SUPPRIMER
 require_once __DIR__ . '/includes/config.php';
 
-echo "<h1>🔧 Création de toutes les tables LBS SHOP</h1>
+echo "<h1>🔧 Création de toutes les tables LBS SHOP</h1>"
 
 // 1. Table users (utilisateurs)
 $tables[] = "CREATE TABLE IF NOT EXISTS users (
