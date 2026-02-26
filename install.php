@@ -351,9 +351,6 @@ foreach($tables as $index => $sql) {
     }
 }
 
-// Réactiver les contraintes
-$pdo->exec("SET session_replication_role = 'origin';");
-
 // Insérer les données de base
 echo "<h2>📦 Insertion des données de base</h2>";
 
