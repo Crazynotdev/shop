@@ -90,10 +90,10 @@ $tables[] = "CREATE TABLE IF NOT EXISTS carts (
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
     variant_id INTEGER REFERENCES product_variants(id) ON DELETE CASCADE,
-    quantity INTEGER DEFAULT 1,
+    quantity INTEGER DEFAULT 1 NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP,
-    UNIQUE(user_id, product_id, COALESCE(variant_id, 0))
+    UNIQUE(user_id, product_id, variant_id)
 );";
 
 // 8. Table orders (commandes)
