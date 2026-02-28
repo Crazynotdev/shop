@@ -1,11 +1,10 @@
 <?php
-require_once '../includes/config.php';
-require_once '../includes/functions.php';
+session_start();
 
-// Vérifier si l'utilisateur est admin
 if(!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     $_SESSION['error'] = "Accès non autorisé";
-    redirect('../login.php');
+    header('Location: ../login.php');
+    exit;
 }
 
 // Statistiques
